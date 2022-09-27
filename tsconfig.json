@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "lib": ["es5", "es6", "dom"],
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": ["node_modules"]
+}
