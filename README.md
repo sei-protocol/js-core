@@ -1,5 +1,5 @@
 # @sei-js/core
-A javascript library for Sei.
+A library for Sei written in Typescript.
 
 ## Installation
 ```yarn add @sei-js/core``` or ```npm install @sei-js/core```
@@ -18,3 +18,5 @@ A javascript library for Sei.
 | SUPPORTED_WALLETS   | string[]                                          | A list of currently supported wallets which can be passed to connect()        |
 | KEPLR_CHAIN_SUGGEST | object                                            | A pre defined object to be passed to keplrs experimentalChainSuggest function |
 
+## Related packages
+[@sei-js/react](https://www.npmjs.com/package/@sei-js/react) - A react helper library for common @sei-js/core functions
