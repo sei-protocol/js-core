@@ -17,5 +17,8 @@
   "repository": "git@github.com:sei-protocol/js-core.git",
   "author": "Carson Aberle",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "@cosmjs/stargate": "^0.29.0"
+  }
 }
