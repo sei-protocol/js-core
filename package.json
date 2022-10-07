@@ -20,7 +20,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@cosmjs/stargate": "^0.29.0"
+    "@cosmjs/stargate": "^0.29.0",
+    "matrix-sdk-test": "^1.0.14"
   },
   "devDependencies": {
     "typescript": "^4.8.4"
