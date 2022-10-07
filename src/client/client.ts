@@ -1,13 +1,13 @@
 import { QueryClient } from "@cosmjs/stargate";
 import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
-import { setupDexExtension } from "./queries";
+import { setupDexExtension, setupOracleExtension } from "./queries";
 
 export const getQueryClient = async (tmUrl: string) => {
   const tmClient = await Tendermint34Client.connect(tmUrl);
   const queryClient = QueryClient.withExtensions(
     tmClient,
-    setupDexExtension
-    // setupOracleExtension
+    setupDexExtension,
+    setupOracleExtension
   );
   return queryClient;
 };

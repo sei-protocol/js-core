@@ -1,35 +1,36 @@
-// import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
-// // @ts-ignore
-// import { QueryClientImpl } from "matrix-sdk-test/src/proto/generated/sei-protocol/sei-chain/seiprotocol.seichain.oracle/module/types/oracle/query";
-// import { formatAmount } from "../utils";
+import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
+import {
+  QueryClientImpl,
+  QueryExchangeRatesResponse,
+} from "matrix-sdk-test/sei-protocol/sei-chain/seiprotocol.seichain.oracle/module/types/oracle/query";
+import { RPC_UNITS } from "../constants";
+import { formatAmount } from "../utils";
 
-// const RPC_UNITS = 18;
+export function setupOracleExtension(base: QueryClient) {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
 
-// // TODO: This should probably be moved into a separate package.
-// export function setupOracleExtension(base: QueryClient) {
-//   const rpc = createProtobufRpcClient(base);
-//   const queryService = new QueryClientImpl(rpc);
-
-//   return {
-//     oracle: {
-//       exchangeRates: async () => {
-//         const { denomOracleExchangeRatePairs } =
-//           await queryService.ExchangeRates();
-
-//         return denomOracleExchangeRatePairs.map((denom: any) => {
-//           return {
-//             ...denom,
-//             oracleExchangeRate: {
-//               ...denom.oracleExchangeRate,
-//               exchangeRate: formatAmount(
-//                 denom.oracleExchangeRate.exchangeRate,
-//                 18
-//               ),
-//             },
-//           };
-//         });
-//       },
-//     },
-//   };
-// }
-export default {};
+  return {
+    oracle: {
+      exchangeRates: async (): Promise<QueryExchangeRatesResponse> => {
+        const { denom_oracle_exchange_rate_pairs } =
+          await queryService.ExchangeRates({});
+        return {
+          denom_oracle_exchange_rate_pairs:
+            denom_oracle_exchange_rate_pairs.map((denom: any) => {
+              return {
+                ...denom,
+                oracleExchangeRate: {
+                  ...denom.oracleExchangeRate,
+                  exchangeRate: formatAmount(
+                    denom.oracleExchangeRate.exchangeRate,
+                    RPC_UNITS
+                  ),
+                },
+              };
+            }),
+        };
+      },
+    },
+  };
+}
