@@ -6,6 +6,7 @@ import {
   QueryGetMarketSummaryResponse,
   QueryGetOrdersResponse,
   QueryGetPricesResponse,
+  // @ts-ignore
 } from "matrix-sdk-test/sei-protocol/sei-chain/seiprotocol.seichain.dex/module/types/dex/query";
 import { RPC_UNITS } from "../constants";
 import { formatAmount } from "../utils";

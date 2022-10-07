@@ -2,6 +2,7 @@ import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 import {
   QueryClientImpl,
   QueryExchangeRatesResponse,
+  //@ts-ignore
 } from "matrix-sdk-test/sei-protocol/sei-chain/seiprotocol.seichain.oracle/module/types/oracle/query";
 import { RPC_UNITS } from "../constants";
 import { formatAmount } from "../utils";
