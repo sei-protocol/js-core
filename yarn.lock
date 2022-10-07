@@ -346,7 +346,7 @@ long@^4.0.0:
 
 matrix-sdk-test@^1.0.14:
   version "1.0.14"
-  resolved "https://registry.yarnpkg.com/matrix-sdk-test/-/matrix-sdk-test-1.0.14.tgz#b56c59c75b93844b8ea4f45d9d1517dd8a547510"
+  resolved "https://registry.npmjs.org/matrix-sdk-test/-/matrix-sdk-test-1.0.14.tgz#b56c59c75b93844b8ea4f45d9d1517dd8a547510"
   integrity sha512-8YNMut98kolg/PPOKpt2VqbPzgXrqUa73uKP4NymHPjGAm5I8p2ghODbewOnPpd9A7U4y5o/YqGyhAT67TCY7A==
 
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
