@@ -1,2 +1,2 @@
 export * as Wallet from './wallet';
-// export * as Client from './queryClient';
+export * as QueryClient from './queryClient';
