@@ -23,7 +23,7 @@ A library for Sei written in Typescript.
 #### Query Client
 The query client is used to query data from modules via REST endpoints.
 
-```
+```javascript
 import { QueryClient } from '@sei-js/core';
 
 const queryClient = await QueryClient.getQueryClient(rpcEndpoint);
@@ -40,7 +40,7 @@ The signing client provides a way to sign and broadcast transactions on Sei.
 
 Use `getSigningClient` to get your `SigningStargateClient`, with the Sei proto/amino messages loaded in.
 
-```
+```javascript
 import { SigningClient } from '@sei-js/core';
 
 const client = await SigningClient.getSigningClient({
