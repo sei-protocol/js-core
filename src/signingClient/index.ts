@@ -1,1 +1,2 @@
-export * from "./stargate";
+export * from './stargate';
+export * from './signingClient';
