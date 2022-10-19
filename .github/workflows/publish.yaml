@@ -15,7 +15,6 @@ jobs:
           # Defaults to the user or organization that owns the workflow file
           scope: '@sei-js'
       - run: yarn
-      - run: yarn build
-      - run: yarn publish
+      - run: yarn deploy
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
