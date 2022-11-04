@@ -1,4 +1,4 @@
-import { KEPLR_CHAIN_SUGGEST } from './config';
+import { getChainSuggest } from './config';
 import { WalletConnect, WalletWindowKey } from './types';
 
 declare global {
@@ -8,16 +8,16 @@ declare global {
 	}
 }
 
-export const connect = async (inputWallet: WalletWindowKey): Promise<WalletConnect | undefined> => {
+export const connect = async (inputWallet: WalletWindowKey, chainId?: string, restUrl?: string, rpcUrl?: string): Promise<WalletConnect | undefined> => {
 	switch (inputWallet) {
 		case 'keplr':
-			await window.keplr.experimentalSuggestChain(KEPLR_CHAIN_SUGGEST);
+			await window.keplr.experimentalSuggestChain(getChainSuggest(chainId, restUrl, rpcUrl));
 			break;
 	}
 
 	if (typeof window === 'undefined' || !window) return;
 
-	const offlineSigner = await window[inputWallet].getOfflineSigner('atlantic-1');
+	const offlineSigner = await window[inputWallet].getOfflineSigner(chainId);
 	const accounts = await offlineSigner.getAccounts();
 
 	return { offlineSigner, accounts };
