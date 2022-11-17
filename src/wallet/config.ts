@@ -91,4 +91,12 @@ const LEAP_WALLET: SupportedWallet = {
 	windowKey: 'leap'
 };
 
-export const SUPPORTED_WALLETS: SupportedWallet[] = [KEPLR_WALLET, LEAP_WALLET];
+const FALCON_WALLET: SupportedWallet = {
+	windowKey: 'falcon'
+};
+
+const COIN_98_WALLET: SupportedWallet = {
+	windowKey: 'coin98'
+};
+
+export const SUPPORTED_WALLETS: SupportedWallet[] = [KEPLR_WALLET, LEAP_WALLET, COIN_98_WALLET, FALCON_WALLET];

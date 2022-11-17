@@ -9,11 +9,7 @@ declare global {
 }
 
 export const connect = async (inputWallet: WalletWindowKey, chainId?: string, restUrl?: string, rpcUrl?: string): Promise<WalletConnect | undefined> => {
-	switch (inputWallet) {
-		case 'keplr':
-			await window.keplr.experimentalSuggestChain(getChainSuggest(chainId, restUrl, rpcUrl));
-			break;
-	}
+	await window[inputWallet].experimentalSuggestChain(getChainSuggest(chainId, restUrl, rpcUrl));
 
 	if (typeof window === 'undefined' || !window) return;
 
