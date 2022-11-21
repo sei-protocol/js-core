@@ -6,19 +6,29 @@ declare global {
 		keplr: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void };
 		leap: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void };
 		coin98: { cosmos: (chain) => Promise<any> };
-		falcon: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void };
+		falcon: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; connect: (chainId) => void };
 	}
 }
 
 export const connect = async (inputWallet: WalletWindowKey, chainId?: string, restUrl?: string, rpcUrl?: string): Promise<WalletConnect | undefined> => {
-	const windowKey = inputWallet === 'coin98' ? 'keplr' : inputWallet;
+	try {
+		const windowKey = inputWallet === 'coin98' ? 'keplr' : inputWallet;
 
-	await window[windowKey].experimentalSuggestChain(getChainSuggest(chainId, restUrl, rpcUrl));
+		if (typeof window === 'undefined' || !window) return;
 
-	if (typeof window === 'undefined' || !window) return;
+		if (inputWallet === 'keplr') {
+			await window.keplr.experimentalSuggestChain(getChainSuggest(chainId, restUrl, rpcUrl));
+		}
 
-	const offlineSigner = await window[windowKey].getOfflineSigner(chainId);
-	const accounts = await offlineSigner.getAccounts();
+		if (windowKey === 'falcon') {
+			await window.falcon.connect('atlantic-1');
+		}
 
-	return { offlineSigner, accounts };
+		const offlineSigner = await window[windowKey].getOfflineSigner(chainId);
+		const accounts = await offlineSigner.getAccounts();
+
+		return { offlineSigner, accounts };
+	} catch (e) {
+		console.log('err', e);
+	}
 };
