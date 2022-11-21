@@ -1,6 +1,6 @@
 {
   "name": "@sei-js/core",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "description": "A javascript library for Sei.",
   "main": "./index.js",
   "types": "./index.d.ts",
