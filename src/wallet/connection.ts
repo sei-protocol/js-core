@@ -3,10 +3,10 @@ import { WalletConnect, WalletWindowKey } from './types';
 
 declare global {
 	interface Window {
-		keplr: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void };
-		leap: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void };
+		keplr: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
+		leap: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
 		coin98: { cosmos: (chain) => Promise<any> };
-		falcon: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; connect: (chainId) => void };
+		falcon: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
 	}
 }
 
@@ -16,12 +16,11 @@ export const connect = async (inputWallet: WalletWindowKey, chainId?: string, re
 
 		if (typeof window === 'undefined' || !window) return;
 
+		// Enable wallet before attempting to call any methods
+		await window[windowKey].enable(chainId);
+
 		if (inputWallet === 'keplr') {
 			await window.keplr.experimentalSuggestChain(getChainSuggest(chainId, restUrl, rpcUrl));
-		}
-
-		if (windowKey === 'falcon') {
-			await window.falcon.connect('atlantic-1');
 		}
 
 		const offlineSigner = await window[windowKey].getOfflineSigner(chainId);
