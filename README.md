@@ -49,6 +49,50 @@ const client = await SigningClient.getSigningClient({
 });
 ```
 
+### Example Code
+```javascript
+import { SigningClient  } from '@sei-js/core';
+import { DirectSecp256k1HdWallet } from '@sei-js/proto/node_modules/@cosmjs/proto-signing';
+import {
+    calculateFee,
+    GasPrice,
+    coin
+  } from "@sei-js/proto/node_modules/@cosmjs/stargate";
+
+(async () => {
+    // Setup wallet
+    const wallet = await DirectSecp256k1HdWallet.fromMnemonic("your mnemonic", {
+        prefix: "sei",
+    })
+
+    const [{ address: signerAddress }] = await wallet.getAccounts();
+
+    // Network config
+    const rpcEndpoint = "https://sei-chain-incentivized.com/sei-chain-tm/";
+    
+    // Setup client
+    const client = await SigningClient.getSigningClient(rpcEndpoint, wallet);
+
+    // Setup fee
+    const gasPrice = GasPrice.fromString("0.025usei"); 
+    const executeFee = calculateFee(200_000, gasPrice);
+
+    // Send some token
+    const result = await client.sendTokens(signerAddress, signerAddress, [coin("1000","usei")], executeFee)
+    console.log(result)
+   
+    // Sign and broadcast custom message
+    const msg = {
+        typeUrl: "/seiprotocol.seichain.....", //need custom your typeUrl on seiprotocol and body
+        value: {
+        //    your body msg
+        }
+    }
+
+    const result_2 = await client.signAndBroadcast(signerAddress, [msg], executeFee)
+    console.log(result_2)
+})()
+```
 
 ## Related packages
 [@sei-js/react](https://www.npmjs.com/package/@sei-js/react) - A react helper library for common @sei-js/core functions
