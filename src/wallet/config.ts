@@ -64,6 +64,21 @@ export const getChainSuggest = (
 				coinDenom: 'UST2',
 				coinMinimalDenom: baseDenomTokenId,
 				coinDecimals: 6
+			},
+			{
+				coinDenom: 'USDT',
+				coinMinimalDenom: 'sei1nxpv5rzquchehj68lp7jmf09sflr3kescvvt77nspt0xw2s3lmlq78a3es',
+				coinDecimals: 6
+			},
+			{
+				coinDenom: 'USDC',
+				coinMinimalDenom: 'sei13p4qt9k6trqf4rpj9ze0hjlrqnrej5f6yn3x2k5sp2a676f5u4tqx0u2st',
+				coinDecimals: 6
+			},
+			{
+				coinDenom: 'uCeler',
+				coinMinimalDenom: 'factory/sei174t9p63nzlmsycmd9x9zxx3ejq9lp2y9f69rp9/uceler',
+				coinDecimals: 6
 			}
 		],
 		feeCurrencies: [
