@@ -10,14 +10,18 @@ A library for Sei written in Typescript.
 | Wallet | [learn more](#wallet) |
 | Client | [learn more](#client) |
 
-### Wallet
-```import { connect, SUPPORTED_WALLETS } from '@sei-js/core/wallet```
+### Wallet**
+```javascript
+import { connect, SUPPORTED_WALLETS, getChainSuggest } from '@sei-js/core/wallet
 
-| Property          | Type                                                            | Description                                                                                                                                   |
-|-------------------|-----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| connect()         | (walletKey: string) => { accounts, offlineSigner}               | Async function to connect to input wallet                                                                                                     |
-| SUPPORTED_WALLETS | string[]                                                        | A list of currently supported wallets which can be passed to connect()                                                                        |
-| getChainSuggest   | (chainId?: string, restUrl?: string, rpcUrl?: string) -> object | A pre defined object to be passed to a wallets experimentalChainSuggest function. Takes optional parameters for chainId, restUrl, and rpcUrl. |
+const { accounts, offlineSigner } = connect('leap') //optionally pass in custom chainId, rpcUrl, and restUrl
+```
+
+| Property          | Type                                                                                                    | Description                                                                                                                                   |
+|-------------------|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| connect()         | (walletKey: string, chainId?: string, restUrl?: string, rpcUrl?: string) => { accounts, offlineSigner}  | Async function to connect to input wallet with optional custom chainId and rpc/rest urls                                                      |
+| SUPPORTED_WALLETS | string[]                                                                                                | A list of currently supported wallets which can be passed to connect()                                                                        |
+| getChainSuggest   | (chainId?: string, restUrl?: string, rpcUrl?: string) -> object                                         | A pre defined object to be passed to a wallets experimentalChainSuggest function. Takes optional parameters for chainId, restUrl, and rpcUrl. |
 
 ### Client
 #### Query Client
