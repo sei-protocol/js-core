@@ -97,6 +97,50 @@ const transferAmount = { amount: SEND_AMOUNT, denom: TOKEN_DENOM };
 const ibcResponse = await signingStargateClient.sendIbcTokens(accounts[0].address, DESTINATION_ADDRESSS, transferAmount, 'transfer', CHANNEL_ID, undefined, undefined, fee)
 ```
 
+### Example
+```javascript
+import { SigningClient  } from '@sei-js/core';
+import { DirectSecp256k1HdWallet } from '@sei-js/proto/node_modules/@cosmjs/proto-signing';
+import {
+    calculateFee,
+    GasPrice,
+    coin
+  } from "@sei-js/proto/node_modules/@cosmjs/stargate";
+
+(async () => {
+    // Setup wallet
+    const wallet = await DirectSecp256k1HdWallet.fromMnemonic("your mnemonic", {
+        prefix: "sei",
+    })
+
+    const [{ address: signerAddress }] = await wallet.getAccounts();
+
+    // Network config
+    const rpcEndpoint = "https://sei-chain-incentivized.com/sei-chain-tm/";
+    
+    // Setup client
+    const client = await SigningClient.getSigningClient(rpcEndpoint, wallet);
+
+    // Setup fee
+    const gasPrice = GasPrice.fromString("0.025usei"); 
+    const executeFee = calculateFee(200_000, gasPrice);
+
+    // Send some token
+    const result = await client.sendTokens(signerAddress, signerAddress, [coin("1000","usei")], executeFee)
+    console.log(result)
+   
+    // Sign and broadcast custom message
+    const msg = {
+        typeUrl: "/seiprotocol.seichain.....", //need custom your typeUrl on seiprotocol and body
+        value: {
+        //    your body msg
+        }
+    }
+
+    const otherResult = await client.signAndBroadcast(signerAddress, [msg], executeFee)
+    console.log(otherResult)
+})()
+```
 
 ### Execute a contract (mint)
 ```javascript
