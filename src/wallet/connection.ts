@@ -5,6 +5,7 @@ declare global {
 	interface Window {
 		keplr: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
 		leap: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
+		compass: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
 		coin98: { cosmos: (chain) => Promise<any> };
 		falcon: { getOfflineSigner: (string) => Promise<any>; experimentalSuggestChain: (object) => void; enable: (chainId) => void };
 	}
